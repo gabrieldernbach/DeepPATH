@@ -239,20 +239,20 @@ mv $OUTPUT_DIR/out* $TEST_OUTPUT/.
 mkdir r3_LUAD_sorted
 cd r3_LUAD_sorted
 
-python ../00_preprocessing/0d_SortTiles.py --SourceFolder='../512px_Tiled_NewPortal/'  --Magnification=20  --MagDiffAllowed=0 --SortingOption=10  --PatientID=-1 --PercentTest=15 --PercentValid=15 --nSplit 0 --outFilenameStats='../r2_test/test_69000k/out_filename_Stats.txt'
+python ../00_preprocessing/0d_SortTiles.py --SourceFolder='../512px_Tiled/'  --Magnification=20  --MagDiffAllowed=0 --SortingOption=10  --PatientID=-1 --PercentTest=15 --PercentValid=15 --nSplit 0 --outFilenameStats='../r2_test/test_69000k/out_filename_Stats.txt'
 
 ```
 
 * Convert to TFRecord:
 ```shell
 # valid
-python 00_preprocessing/TFRecord_multi_Classes/build_TF_test_multiClass.py --directory='r3_LUAD_sorted/512px_Tiled_NewPortal/'  --output_directory='r3_TFRecord_valid' --num_threads=1 --one_FT_per_Tile=False --ImageSet_basename='valid' --labels_names='labelref_r3.txt' --labels='labels_r3.txt' --PatientID=14
+python 00_preprocessing/TFRecord_multi_Classes/build_TF_test_multiClass.py --directory='r3_LUAD_sorted/512px_Tiled/'  --output_directory='r3_TFRecord_valid' --num_threads=1 --one_FT_per_Tile=False --ImageSet_basename='valid' --labels_names='labelref_r3.txt' --labels='labels_r3.txt' --PatientID=14
 
 # test
-python  00_preprocessing/TFRecord_multi_Classes/build_TF_test_multiClass.py --directory='r3_LUAD_sorted/512px_Tiled_NewPortal'  --output_directory='r3_TFRecord_test' --num_threads=1 --one_FT_per_Tile=False --ImageSet_basename='test' --labels_names='labelref_r3.txt' --labels='labels_r3.txt' --PatientID=14
+python  00_preprocessing/TFRecord_multi_Classes/build_TF_test_multiClass.py --directory='r3_LUAD_sorted/512px_Tiled'  --output_directory='r3_TFRecord_test' --num_threads=1 --one_FT_per_Tile=False --ImageSet_basename='test' --labels_names='labelref_r3.txt' --labels='labels_r3.txt' --PatientID=14
 
 # train
-python 00_preprocessing/TFRecord_multi_Classes/build_image_data_multiClass.py --directory='r3_LUAD_sorted/512px_Tiled_NewPortal' --output_directory='r3_TFRecord_train' --train_shards=1024 --validation_shards=128 --num_threads=16  --labels_names='labelref_r3.txt' --labels='labels_r3.txt' --PatientID=14
+python 00_preprocessing/TFRecord_multi_Classes/build_image_data_multiClass.py --directory='r3_LUAD_sorted/512px_Tiled' --output_directory='r3_TFRecord_train' --train_shards=1024 --validation_shards=128 --num_threads=16  --labels_names='labelref_r3.txt' --labels='labels_r3.txt' --PatientID=14
 ```
 
 * train the model with 10-class sigmoid classifier:
