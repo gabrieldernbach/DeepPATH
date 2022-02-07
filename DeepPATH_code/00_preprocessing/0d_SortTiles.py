@@ -33,7 +33,7 @@ import random
 import numpy as np
 from shutil import copyfile
 # import cv2 as cv
-import spams
+# import spams
 from PIL import Image
 
 def extract_stage(metadata):
